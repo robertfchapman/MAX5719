@@ -32,7 +32,7 @@ MAX5719::MAX5719(uint8_t ss, uint8_t ldac)
      pinMode(ldac, OUTPUT);
 
      _SS = ss;  // Set Slave Select Pin
-     _LDAC = ldac
+     _LDAC = ldac;
 }
 
 
@@ -48,8 +48,8 @@ void MAX5719::setOutput(double voltage) {
  
    uint32_t code = (uint32_t)(voltage / 5.0 * 0xFFFFFF);
  
-   digitalWrite(DAC_CS1, LOW);
-   digitalWrite(DAC_LDAC, HIGH);
+   digitalWrite(_SS, LOW);
+   digitalWrite(_LDAC, HIGH);
 
    delay(2);
 
@@ -59,8 +59,8 @@ void MAX5719::setOutput(double voltage) {
    
    delay(2);
 
-   digitalWrite(DAC_CS1, HIGH);
-   digitalWrite(DAC_LDAC, LOW);
+   digitalWrite(_SS, HIGH);
+   digitalWrite(_LDAC, LOW);
  
  }
 
