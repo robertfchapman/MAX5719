@@ -27,9 +27,9 @@
 
 #ifdef __cplusplus
 
-#define MAX5481_MAJOR 0
-#define MAX5481_MINOR 1
-#define MAX5481_PATCH 0
+#define MAX5719_MAJOR 0
+#define MAX5719_MINOR 1
+#define MAX5719_PATCH 0
 
 #include <Arduino.h>
 
