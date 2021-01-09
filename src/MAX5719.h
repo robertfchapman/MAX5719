@@ -40,6 +40,7 @@ class MAX5719
         MAX5719(uint8_t ss, uint8_t ldac);
 
         void begin(void);
+        void setOutput(double);
 
     private:
         unsigned int _SS;
