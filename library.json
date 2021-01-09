@@ -1,0 +1,19 @@
+{
+  "name": "MAX5719",
+  "keywords": "MAX5719, 20-bit, DAC, SPI",
+  "description": "Arduino library for Maxim Integrated MAX5719 20-bit DAC",
+  "authors": 
+  {
+    "name": "Robert F. Chapman",
+    "email": "Robert.F.Chapman@gmail.com",
+    "maintainer": true
+  },
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/robertfchapman/MAX5719.git"
+  },
+  "version": "0.1.0",
+  "frameworks": "arduino",
+  "platforms": "*"
+}
