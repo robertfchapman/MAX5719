@@ -3,7 +3,15 @@ Arduino Library for the Maxim Integrated MAX5719 20-bit DAC
 
 See the Maxim Integrated datasheet for details [MAX5719](https://datasheets.maximintegrated.com/en/ds/MAX5717-MAX5719.pdf)
 
-## Class and Methods
+## Class, Methods, Defines
+
+## Defines
+### MAX5719_MAJOR
+### MAX5719_MINOR
+### MAX5719_PATCH
+##### Description
+These defines can be used to determine the current version of the library being used in your code.
+
 
 ## Constructor
 ### MAX5719(uint8_t SSPIN, uint8_t LDAC)
