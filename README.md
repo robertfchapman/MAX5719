@@ -26,6 +26,33 @@ LDAC: (parameter required) LDAC Input. A falling edge updates the internal DAC l
 None
 ##### Example
 ```C++
-// Instantiation of MAX5719 Digital Potentiometer
-MAX5481 myDAC(5, 7);
+// Instantiation of MAX5719 DAC
+MAX5719 myDAC(5, 7);
+```
+
+## begin()
+
+Initializes SPI and places the chip-select and LDAC pins in their inactive states.
+
+```C++
+myDAC.begin();
+```
+
+## setCode(uint32_t code)
+
+Writes a raw 20-bit code to the DAC. Values greater than `MAX5719::MAX_CODE`
+(`0xFFFFF`) are clamped to full scale. The library places the code in the first
+20 bits of the MAX5719's 24-clock SPI frame.
+
+```C++
+myDAC.setCode(0x80000); // Approximately midscale
+```
+
+## setOutput(double voltage)
+
+Compatibility helper that converts a voltage from 0 V to 5 V to the nearest
+20-bit code and calls `setCode()`. Values outside that range are clamped.
+
+```C++
+myDAC.setOutput(2.5); // Approximately midscale
 ```

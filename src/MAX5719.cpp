@@ -44,23 +44,44 @@ void MAX5719::begin(void)
 }
 
 
-void MAX5719::setOutput(double voltage) {
- 
-   uint32_t code = (uint32_t)(voltage / 5.0 * 0xFFFFFF);
- 
+void MAX5719::setCode(uint32_t code) {
+   if (code > MAX_CODE) {
+      code = MAX_CODE;
+   }
+
+   // The MAX5719 accepts a 24-clock frame. The 20-bit DAC code occupies
+   // D23 through D4; the final four bits are don't-care bits.
+   uint32_t frame = code << 4;
+
    digitalWrite(_SS, LOW);
    digitalWrite(_LDAC, HIGH);
 
    delay(2);
 
-   SPI.transfer((code & 0x00FF0000) >> 16);
-   SPI.transfer((code & 0x0000FF00) >> 8);
-   SPI.transfer((code & 0x000000FF));
+   SPI.transfer((frame >> 16) & 0xFF);
+   SPI.transfer((frame >> 8) & 0xFF);
+   SPI.transfer(frame & 0xFF);
    
    delay(2);
 
    digitalWrite(_SS, HIGH);
    digitalWrite(_LDAC, LOW);
- 
- }
+}
+
+
+void MAX5719::setOutput(double voltage) {
+   uint32_t code;
+
+   // Treat negative values and NaN as zero-scale.
+   if (!(voltage > 0.0)) {
+      code = 0;
+   } else if (voltage >= 5.0) {
+      code = MAX_CODE;
+   } else {
+      // Round to the nearest 20-bit code instead of truncating.
+      code = (uint32_t)((voltage / 5.0 * MAX_CODE) + 0.5);
+   }
+
+   setCode(code);
+}
 

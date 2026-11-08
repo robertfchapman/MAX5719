@@ -28,7 +28,7 @@
 #ifdef __cplusplus
 
 #define MAX5719_MAJOR 0
-#define MAX5719_MINOR 1
+#define MAX5719_MINOR 2
 #define MAX5719_PATCH 0
 
 #include <Arduino.h>
@@ -37,9 +37,12 @@
 class MAX5719
 {
     public:
+        static const uint32_t MAX_CODE = 0xFFFFF;
+
         MAX5719(uint8_t ss, uint8_t ldac);
 
         void begin(void);
+        void setCode(uint32_t code);
         void setOutput(double);
 
     private:
